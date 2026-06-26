@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://c4q41ngnf276k"]
+
+[ext_resource type="Texture2D" uid="uid://865k4epqc2b3" path="res://Assets/Sprites/Overworld.png" id="1_wf575"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ai1ic"]
+atlas = ExtResource("1_wf575")
+region = Rect2(85, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3dea"]
+atlas = ExtResource("1_wf575")
+region = Rect2(102, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_41haq"]
+atlas = ExtResource("1_wf575")
+region = Rect2(119, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkxe8"]
+atlas = ExtResource("1_wf575")
+region = Rect2(85, 17, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8uuj"]
+atlas = ExtResource("1_wf575")
+region = Rect2(102, 17, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gsce"]
+atlas = ExtResource("1_wf575")
+region = Rect2(119, 17, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tt62d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ai1ic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c3dea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_41haq")
+}],
+"loop": 1,
+"name": &"Water",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkxe8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s8uuj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1gsce")
+}],
+"loop": 1,
+"name": &"Water_Below",
+"speed": 5.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" unique_id=1797197836]
+modulate = Color(1, 1, 1, 0.57254905)
+z_index = 1
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_tt62d")
+animation = &"Water"
+autoplay = "Water"
