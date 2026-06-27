@@ -31,14 +31,6 @@ region = Rect2(102, 0, 16, 16)
 atlas = ExtResource("1_lkv7d")
 region = Rect2(119, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kq7hj"]
-atlas = ExtResource("1_lkv7d")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7iw6i"]
-atlas = ExtResource("1_lkv7d")
-region = Rect2(136, 0, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ushfy"]
 atlas = ExtResource("1_lkv7d")
 region = Rect2(0, 0, 16, 16)
@@ -83,17 +75,6 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kq7hj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7iw6i")
-}],
-"loop": 1,
-"name": &"Walk",
-"speed": 5.0
-}, {
-"frames": [{
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_ushfy")
 }, {
@@ -105,12 +86,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_60swb"]
-radius = 26.019224
-
-[sub_resource type="LabelSettings" id="LabelSettings_21xkr"]
-font_color = Color(0, 0, 0, 1)
-
 [node name="Player" type="CharacterBody2D" unique_id=1352510023]
 script = ExtResource("1_ushfy")
 
@@ -119,16 +94,11 @@ shape = SubResource("RectangleShape2D_tt62d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1012721271]
 texture_filter = 1
-position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_tt62d")
-animation = &"Walk"
+animation = &"Peck"
 autoplay = "default"
-frame_progress = 0.21650112
-
-[node name="Range" type="Area2D" parent="." unique_id=637441575]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Range" unique_id=1559144374]
-shape = SubResource("CircleShape2D_60swb")
+frame = 1
+frame_progress = 0.6928298
 
 [node name="Hud" type="CanvasLayer" parent="." unique_id=1108686734]
 script = ExtResource("3_owm7s")
@@ -150,20 +120,6 @@ offset_left = -26.5
 offset_right = 26.5
 offset_bottom = 23.0
 grow_horizontal = 2
+rotation = -0.010012559
 text = "Energy"
-label_settings = SubResource("LabelSettings_21xkr")
 horizontal_alignment = 2
-
-[node name="Health" type="ProgressBar" parent="Hud/Control" unique_id=895934817]
-layout_mode = 1
-offset_right = 100.0
-offset_bottom = 27.0
-step = 1.0
-show_percentage = false
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1475729804]
-
-[connection signal="area_entered" from="Range" to="." method="_on_range_area_entered"]
-[connection signal="area_exited" from="Range" to="." method="_on_range_area_exited"]
-[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
-[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]

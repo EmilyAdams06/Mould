@@ -1,17 +1,32 @@
+class_name Character
+
 extends CharacterBody2D
 
+#Variables
+@export var maxEnergy = 100
+@export var maxHealth = 100
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -80.0
 const GLIDE_FACTOR = 0.1
 const FRICTION = 4.0
+const DIVE_COST = 5.0
+const FLAP_COST = 1.0
+
+var health = 100.0
+var energy = 100.0
+var is_in_range: bool = false
+
+var target_object: Area2D
 
 func _physics_process(delta: float) -> void:
+	var direction := Input.get_axis("ui_left", "ui_right")
 	# Add the gravity.
 	if not is_on_floor():
-		if Input.is_action_pressed("dive"):
+		if Input.is_action_pressed("dive") and energy > 0:
 			velocity += get_gravity() * delta
 			$AnimatedSprite2D.animation = &"Dive"
+			energy -= DIVE_COST * delta
 		else:
 			velocity += get_gravity() * GLIDE_FACTOR * delta
 			$AnimatedSprite2D.animation = &"Flap"
@@ -19,17 +34,26 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		if Input.is_action_pressed("dive"):
 			$AnimatedSprite2D.animation = &"Peck"
+		elif direction:
+			$AnimatedSprite2D.animation = &"Walk"
 		else:
 			$AnimatedSprite2D.animation = &"default"
-		
 
 	# Handle jump.
-	if Input.is_action_just_pressed("flap"):
+	if Input.is_action_just_pressed("flap") and energy > 0:
 		velocity.y = JUMP_VELOCITY
+		energy -= FLAP_COST
+
+	# Eat seed
+	if is_in_range:
+		if Input.is_action_just_pressed("dive"):
+			print("Yum")
+			energy += 10
+			target_object.queue_free()
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
+	
 	if direction:
 		velocity.x = lerp(velocity.x, direction * SPEED, delta)
 		if direction > 0:
@@ -46,4 +70,20 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = lerp(velocity.x, 0.0, delta)
 
+	energy = clamp(energy, 0.0, 100.0)
+
 	move_and_slide()
+	
+
+
+func _on_range_area_entered(area: Area2D) -> void:
+	if area is Seed:
+		is_in_range = true
+		print("isinrange")
+		target_object = area
+
+
+func _on_range_area_exited(area: Area2D) -> void:
+	if area is Seed:
+		is_in_range = false
+		target_object = null
