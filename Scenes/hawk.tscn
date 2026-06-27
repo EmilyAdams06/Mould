@@ -1,11 +1,47 @@
 [gd_scene format=3 uid="uid://qhewh0hqu6w7"]
 
-[ext_resource type="Script" uid="uid://dsgktytvu71hv" path="res://Scenes/hawk.gd" id="1_5mrjw"]
-[ext_resource type="Texture2D" uid="uid://be3mse05fwoin" path="res://Assets/Sprites/bird_temp.png" id="1_dd4rj"]
+[ext_resource type="Script" uid="uid://dsgktytvu71hv" path="res://Scripts/hawk.gd" id="1_5mrjw"]
+[ext_resource type="Texture2D" uid="uid://bnhpfta88bxww" path="res://Assets/Sprites/enemy_hawk.png" id="2_5mrjw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tt62d"]
-radius = 16.0
-height = 32.0
+radius = 7.0
+height = 14.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rcmg"]
+atlas = ExtResource("2_5mrjw")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akegv"]
+atlas = ExtResource("2_5mrjw")
+region = Rect2(17, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imrqw"]
+atlas = ExtResource("2_5mrjw")
+region = Rect2(34, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6gr3"]
+atlas = ExtResource("2_5mrjw")
+region = Rect2(51, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s2hgq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5rcmg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akegv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_imrqw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6gr3")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="Hawk" type="CharacterBody2D" unique_id=1174032302]
 script = ExtResource("1_5mrjw")
@@ -13,5 +49,6 @@ script = ExtResource("1_5mrjw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=192598586]
 shape = SubResource("CapsuleShape2D_tt62d")
 
-[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D" unique_id=792707618]
-texture = ExtResource("1_dd4rj")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D" unique_id=799523263]
+sprite_frames = SubResource("SpriteFrames_s2hgq")
+autoplay = "default"
