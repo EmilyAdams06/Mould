@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cewleiqtpuv3p" path="res://Assets/Sprites/bird_sheet.png" id="1_lkv7d"]
 [ext_resource type="Script" uid="uid://b40qfgatdd5jt" path="res://Scripts/character.gd" id="1_ushfy"]
-[ext_resource type="Script" uid="uid://dsimp6fkjvsrc" path="res://Scripts/canvas_layer.gd" id="3_owm7s"]
+[ext_resource type="Script" uid="uid://dsimp6fkjvsrc" path="res://Scripts/HUD.gd" id="3_owm7s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tt62d"]
 size = Vector2(16, 16)
