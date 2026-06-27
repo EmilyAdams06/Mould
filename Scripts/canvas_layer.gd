@@ -7,5 +7,5 @@ extends CanvasLayer
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	label.text = str(roundi(player.energy)) + "/" + str(player.maxEnergy)
+	label.text = str(roundi(player.energy)) + "/" + str(roundi(player.maxEnergy))
 	health.value = player.health

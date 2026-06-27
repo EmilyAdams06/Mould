@@ -17,7 +17,7 @@ var health = 100.0
 var energy = 100.0
 var is_in_range: bool = false
 
-var target_object: Area2D
+var target_object: Node2D
 
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
@@ -76,14 +76,14 @@ func _physics_process(delta: float) -> void:
 	
 
 
-func _on_range_area_entered(area: Area2D) -> void:
-	if area is Seed:
+func _on_range_body_entered(body: Node2D) -> void:
+	if body is Seed:
 		is_in_range = true
-		print("isinrange")
-		target_object = area
+		print("hello")
+		target_object = body
 
 
-func _on_range_area_exited(area: Area2D) -> void:
-	if area is Seed:
+func _on_range_body_exited(body: Node2D) -> void:
+	if body is Seed:
 		is_in_range = false
 		target_object = null
