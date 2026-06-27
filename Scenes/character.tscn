@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cewleiqtpuv3p" path="res://Assets/Sprites/bird_sheet.png" id="1_lkv7d"]
 [ext_resource type="Script" uid="uid://b40qfgatdd5jt" path="res://Scripts/character.gd" id="1_ushfy"]
-[ext_resource type="Script" uid="uid://dsimp6fkjvsrc" path="res://Scenes/canvas_layer.gd" id="3_owm7s"]
+[ext_resource type="Script" uid="uid://dsimp6fkjvsrc" path="res://Scripts/canvas_layer.gd" id="3_owm7s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tt62d"]
 size = Vector2(16, 16)
@@ -121,9 +121,7 @@ shape = SubResource("RectangleShape2D_tt62d")
 texture_filter = 1
 position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_tt62d")
-animation = &"Walk"
 autoplay = "default"
-frame_progress = 0.21650112
 
 [node name="Range" type="Area2D" parent="." unique_id=637441575]
 
@@ -167,3 +165,4 @@ show_percentage = false
 [connection signal="area_exited" from="Range" to="." method="_on_range_area_exited"]
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
+[connection signal="body_shape_entered" from="Range" to="." method="_on_range_body_shape_entered"]

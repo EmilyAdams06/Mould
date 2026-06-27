@@ -1,24 +1,22 @@
 [gd_scene format=3 uid="uid://huyqfmvmfws8"]
 
-[ext_resource type="Script" uid="uid://3qqaweegpra1" path="res://Scripts/seed.gd" id="1_arhpd"]
+[ext_resource type="Script" uid="uid://duo4fx8b667wb" path="res://Scripts/seed.gd" id="1_arhpd"]
 [ext_resource type="Texture2D" uid="uid://rvq8cug6133y" path="res://Assets/Sprites/foilage.png" id="2_nwbkr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oxpsm"]
 atlas = ExtResource("2_nwbkr")
 region = Rect2(0.77552795, 56.769836, 13.087978, 13.217094)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_60swb"]
-radius = 4.0
-height = 10.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_s2hgq"]
+radius = 0.0
 
-[node name="Area2D" type="Area2D" unique_id=1077026660]
+[node name="Seed" type="RigidBody2D" unique_id=1675158719]
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_arhpd")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=60215078]
 texture = SubResource("AtlasTexture_oxpsm")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1551707519]
-shape = SubResource("CapsuleShape2D_60swb")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=198663318]
+shape = SubResource("CircleShape2D_s2hgq")
