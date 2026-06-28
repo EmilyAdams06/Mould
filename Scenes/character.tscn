@@ -123,7 +123,7 @@ position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_tt62d")
 autoplay = "default"
 
-[node name="Range" type="Area2D" parent="." unique_id=637441575]
+[node name="Range" type="Area2D" parent="." unique_id=637441575 groups=["player"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Range" unique_id=1559144374]
 shape = SubResource("CircleShape2D_60swb")

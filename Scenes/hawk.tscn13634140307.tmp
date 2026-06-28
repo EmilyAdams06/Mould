@@ -82,17 +82,17 @@ safe_margin = 0.07
 script = ExtResource("1_5mrjw")
 
 [node name="DetectionArea" type="Area2D" parent="." unique_id=1691266832]
-z_index = 1
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DetectionArea" unique_id=1764056972]
-polygon = PackedVector2Array(3, 6, 177, 7, 294, 170, -178, 187, -90, 10)
+polygon = PackedVector2Array(3, 6, 198, 104, -108, 104)
 
 [node name="Behavior" type="Node" parent="." unique_id=657092735 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_5rcmg")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="Behavior" unique_id=759059973]
+[node name="Idle" type="Node" parent="Behavior" unique_id=759059973 node_paths=PackedStringArray("hawk")]
 script = ExtResource("4_akegv")
+hawk = NodePath("../..")
 metadata/_custom_type_script = "uid://8mq45pf1jbav"
 
 [node name="Attack" type="Node" parent="Behavior" unique_id=985517829 node_paths=PackedStringArray("hawk")]
@@ -104,8 +104,6 @@ metadata/_custom_type_script = "uid://bssf4x8wngmeq"
 shape = SubResource("CapsuleShape2D_tt62d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D" unique_id=799523263]
-position = Vector2(1.5, -3.0000002)
-scale = Vector2(1.4375, 1.3749999)
 sprite_frames = SubResource("SpriteFrames_s2hgq")
 animation = &"Glide"
 autoplay = "default"

@@ -1,15 +1,30 @@
 extends CharacterBody2D
 
-
 const SPEED = 300.0
 const JUMP_VELOCITY = -80.0
 const GLIDE_FACTOR = 0.05
 
 @export var max_height = 0.0
-@export var screen_height = get_viewport_rect().size.y
 
+var detected_player: Node2D = null
+var state_machine # ref to state machine
+
+func _ready():
+	var detection_area = $DetectionArea
+	detection_area.area_entered.connect(Callable(self,"_on_detection_area_entered"))
+	detection_area.area_exited.connect(Callable(self,"_on_detection_area_exited"))
+
+	state_machine = $Behavior
+	
+func _on_detection_area_entered(area: Area2D):
+	if area.is_in_group("player"):
+		detected_player = area.get_parent()
+		print("PLAYER DETECTED: ", detected_player.name)
+func _on_detection_area_exited(area: Area2D):
+	if area.is_in_group("player"):
+		detected_player = null
+			
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * GLIDE_FACTOR * delta
 		$CollisionShape2D/AnimatedSprite2D.animation = &"Flappy"
@@ -20,7 +35,5 @@ func _physics_process(delta: float) -> void:
 		$CollisionShape2D/AnimatedSprite2D.flip_h = false
 	else:
 		$CollisionShape2D/AnimatedSprite2D.flip_h = true
-
-	move_and_slide()
 	
-	# Handle jump.
+	move_and_slide()
