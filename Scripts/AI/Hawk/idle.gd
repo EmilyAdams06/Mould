@@ -1,10 +1,7 @@
 extends HawkState
 class_name Idle
 
-@export var hawk: CharacterBody2D
-@export var move_speed := 10.0
-
-const JUMP_VELOCITY = -80.0
+@export var hawk: Hawk
 
 var time_since_last_action := 0.0
 var is_going_left := false
@@ -40,7 +37,7 @@ func Update(delta: float):
 			else:
 				# jump repeatedly while ascending
 				if int(phase_timer * 2) % 2 == 0:  # Every ~0.5 seconds
-					hawk.velocity.y = JUMP_VELOCITY
+					hawk.velocity.y = hawk.JUMP_VELOCITY
 		
 		"patrol":
 			# Patrol back and forth (12 loops)
@@ -51,10 +48,10 @@ func Update(delta: float):
 					is_going_left = (patrol_step % 2 == 0)
 				
 				if is_going_left:
-					hawk.velocity.x = 50.0
+					hawk.velocity.x = hawk.SPEED
 				else:
-					hawk.velocity.x = -50.0
-				hawk.velocity.y = JUMP_VELOCITY*0.001
+					hawk.velocity.x = -hawk.SPEED
+				hawk.velocity.y = hawk.JUMP_VELOCITY*0.001
 			else:
 				# Patrol complete, wait before ascending again
 				current_phase = "waiting"
