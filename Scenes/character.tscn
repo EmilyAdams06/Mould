@@ -53,6 +53,11 @@ region = Rect2(17, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tt62d"]
 animations = [{
+"frames": [],
+"loop": 1,
+"name": &"Attack",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l1rcp")
@@ -133,7 +138,7 @@ shape = SubResource("RectangleShape2D_tt62d")
 texture_filter = 1
 position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_tt62d")
-animation = &"Damage"
+animation = &"Attack"
 autoplay = "default"
 
 [node name="Range" type="Area2D" parent="." unique_id=637441575 groups=["player"]]

@@ -12,12 +12,14 @@ const GLIDE_FACTOR = 0.1
 const FRICTION = 4.0
 const DIVE_COST = 5.0
 const FLAP_COST = 1.0
+const ATTACK_COST = 5.0
 
 var health = 100.0
 var energy = 100.0
 var is_in_range: bool = false
 
 var damage_timer = -1.0
+var attack_timer = -1.0
 
 var target_object: Node2D
 
@@ -63,6 +65,11 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 		energy -= FLAP_COST
 
+	# Handle attack
+	if Input.is_action_just_pressed("attack") and energy > 0:
+		energy -= ATTACK_COST
+		attack_timer = 0.5
+		
 	# Eat seed
 	if is_in_range:
 		if Input.is_action_just_pressed("dive"):
