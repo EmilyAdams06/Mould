@@ -7,6 +7,22 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tt62d"]
 size = Vector2(16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_le1tg"]
+atlas = ExtResource("1_lkv7d")
+region = Rect2(204, 17, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2daya"]
+atlas = ExtResource("1_lkv7d")
+region = Rect2(221, 17, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvyft"]
+atlas = ExtResource("1_lkv7d")
+region = Rect2(204, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dm6ib"]
+atlas = ExtResource("1_lkv7d")
+region = Rect2(221, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_l1rcp"]
 atlas = ExtResource("1_lkv7d")
 region = Rect2(187, 0, 16, 16)
@@ -53,9 +69,26 @@ region = Rect2(17, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tt62d"]
 animations = [{
-"frames": [],
-"loop": 1,
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_le1tg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2daya")
+}],
+"loop": 0,
 "name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvyft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dm6ib")
+}],
+"loop": 0,
+"name": &"Attack_floor",
 "speed": 5.0
 }, {
 "frames": [{
@@ -128,6 +161,9 @@ radius = 26.019224
 [sub_resource type="LabelSettings" id="LabelSettings_21xkr"]
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_lpe60"]
+radius = 33.01515
+
 [node name="Player" type="CharacterBody2D" unique_id=1352510023]
 script = ExtResource("1_ushfy")
 
@@ -138,7 +174,7 @@ shape = SubResource("RectangleShape2D_tt62d")
 texture_filter = 1
 position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_tt62d")
-animation = &"Attack"
+animation = &"Attack_floor"
 autoplay = "default"
 
 [node name="Range" type="Area2D" parent="." unique_id=637441575 groups=["player"]]
@@ -178,6 +214,19 @@ step = 1.0
 show_percentage = false
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1475729804]
+
+[node name="RFist" type="Area2D" parent="." unique_id=1324129349]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RFist" unique_id=286599357]
+position = Vector2(22, 0)
+shape = SubResource("CircleShape2D_lpe60")
+
+[node name="LFist" type="Area2D" parent="." unique_id=114617756]
+position = Vector2(-45, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LFist" unique_id=1378695266]
+position = Vector2(22, 0)
+shape = SubResource("CircleShape2D_lpe60")
 
 [connection signal="area_entered" from="Range" to="." method="_on_range_area_entered"]
 [connection signal="area_exited" from="Range" to="." method="_on_range_area_exited"]

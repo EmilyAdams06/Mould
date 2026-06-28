@@ -6,6 +6,7 @@ var JUMP_VELOCITY = -80.0
 var SWOOP_SPEED = 300.0
 var DAMAGE = 10
 const GLIDE_FACTOR = 0.05
+var health = 3
 
 @export var max_height = 0.0
 @export_enum("Normal", "Corrupt") var type: String
@@ -14,9 +15,17 @@ const GLIDE_FACTOR = 0.05
 @onready var corrupt_hawk_frames = preload("res://Assets/HawkAnimations/corrupt_hawk.tres")
 
 var detected_player: Node2D = null
-var attack # ref to state machine
+var attack: Attack # ref to state machine
 
 var start_height: float
+var damage_timer: float = -1.0
+
+func receive_damage(amount: int) -> void:
+	health -= amount
+	damage_timer = 0.3
+	attack.Transitioned.emit(attack, "idle")
+	if health <= 0:
+		queue_free()
 
 func _ready():
 	var detection_area = $DetectionArea
@@ -29,12 +38,14 @@ func _ready():
 		JUMP_VELOCITY = -80.0
 		SWOOP_SPEED = 300.0
 		DAMAGE = 10
+		health = 3
 	elif type == "Corrupt":
 		$CollisionShape2D/AnimatedSprite2D.sprite_frames = corrupt_hawk_frames
 		SPEED = 25.0
 		JUMP_VELOCITY = -40.0
 		SWOOP_SPEED = 150.0
 		DAMAGE = 30
+		health = 6
 		
 	start_height = position.y
 
@@ -49,6 +60,11 @@ func _on_detection_area_exited(area: Area2D):
 		detected_player = null
 			
 func _physics_process(delta: float) -> void:
+	damage_timer -= delta
+	if damage_timer > 0.0:
+		$CollisionShape2D/AnimatedSprite2D.modulate = Color(1.0, 0.5, 0.5, 1.0)
+	else:
+		$CollisionShape2D/AnimatedSprite2D.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	if not is_on_floor():
 		velocity += get_gravity() * GLIDE_FACTOR * delta
 		$CollisionShape2D/AnimatedSprite2D.animation = &"Flappy"
@@ -66,6 +82,7 @@ func _physics_process(delta: float) -> void:
 func _on_attack_range_body_entered(body: Node2D) -> void:
 	if body is Character:
 		attack.attack_success = true
+		if damage_timer > 0.0: return
 		body.receive_damage(DAMAGE)
 		print("attacked")
 

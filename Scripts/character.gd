@@ -24,12 +24,13 @@ var attack_timer = -1.0
 var target_object: Node2D
 
 func receive_damage(amount: int) -> void:
-	health -= amount
-	$AnimatedSprite2D.animation = &"Damage"
-	$AnimatedSprite2D.modulate = Color(1.0, 0.5, 0.5, 1.0)
-	damage_timer = 0.3
-	if health <= 0:
-		die()
+	if attack_timer < 0.1:
+		health -= amount
+		$AnimatedSprite2D.animation = &"Damage"
+		$AnimatedSprite2D.modulate = Color(1.0, 0.5, 0.5, 1.0)
+		damage_timer = 0.3
+		if health <= 0:
+			die()
 
 func die() -> void:
 	get_tree().reload_current_scene()
@@ -38,7 +39,14 @@ func die() -> void:
 
 func _physics_process(delta: float) -> void:
 	damage_timer -= delta
+	attack_timer -= delta
 	if damage_timer > 0.0: return
+	if attack_timer > 0.1:
+		if is_on_floor():
+			$AnimatedSprite2D.animation = &"Attack_floor"
+		else:
+			$AnimatedSprite2D.animation = &"Attack"
+		return
 	$AnimatedSprite2D.modulate = Color(1.0,1.0,1.0,1.0)
 	
 	var direction := Input.get_axis("move_left", "move_right")
@@ -64,12 +72,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("flap") and energy > 0:
 		velocity.y = JUMP_VELOCITY
 		energy -= FLAP_COST
-
-	# Handle attack
-	if Input.is_action_just_pressed("attack") and energy > 0:
-		energy -= ATTACK_COST
-		attack_timer = 0.5
 		
+	if attack_timer > 0.1:
+		$AnimatedSprite2D.modulate = Color(0.0,1.0,1.0,1.0)
 	# Eat seed
 	if is_in_range:
 		if Input.is_action_just_pressed("dive"):
@@ -92,6 +97,15 @@ func _physics_process(delta: float) -> void:
 			velocity.x = lerp(velocity.x, 0.0, delta * FRICTION)
 		else:
 			velocity.x = lerp(velocity.x, 0.0, delta)
+
+	# Handle attack
+	if Input.is_action_just_pressed("attack") and energy > 0 and attack_timer < 0.0:
+		energy -= ATTACK_COST
+		var fist: Area2D = $LFist if $AnimatedSprite2D.flip_h else $RFist
+		for body in fist.get_overlapping_bodies():
+			if body is Hawk:
+				body.receive_damage(1)
+		attack_timer = 0.5
 
 	energy = clamp(energy, 0.0, 100.0)
 
