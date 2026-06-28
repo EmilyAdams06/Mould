@@ -18,6 +18,7 @@ func _ready():
 		hawk = get_parent().get_parent()  # Behavior -> CharacterBody2D (Hawk)
 
 func enter():
+	print("idling")
 	current_phase = "ascending"
 	phase_timer = 0.0
 	patrol_step = 0
@@ -26,14 +27,10 @@ func enter():
 func Update(delta: float):
 	if not hawk:
 		return
-				
-	# check for player detection
-	if hawk.detected_player:
-		Transitioned.emit(self, "attack")
-		return
 	
 	phase_timer += delta
 	
+	# ascending needs a height limit
 	match current_phase:
 		"ascending": # to the sky!
 			if phase_timer >= 2.0: # ascend
@@ -62,6 +59,12 @@ func Update(delta: float):
 				# Patrol complete, wait before ascending again
 				current_phase = "waiting"
 				phase_timer = 0.0
+				
+			# check for player detection
+			if hawk.detected_player:
+				Transitioned.emit(self, "attack")
+				print("noticed player")
+				return	
 		
 		"waiting":
 			# Rest for 3 seconds before ascending again

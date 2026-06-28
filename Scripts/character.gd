@@ -19,6 +19,16 @@ var is_in_range: bool = false
 
 var target_object: Node2D
 
+func receive_damage(amount: int) -> void:
+	health -= amount
+	if health <= 0:
+		die()
+
+func die() -> void:
+	get_tree().reload_current_scene()
+	health = maxHealth
+	energy = maxEnergy
+
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
 	# Add the gravity.
@@ -79,11 +89,12 @@ func _physics_process(delta: float) -> void:
 func _on_range_body_entered(body: Node2D) -> void:
 	if body is Seed:
 		is_in_range = true
-		print("hello")
+		print("isInRange")
 		target_object = body
 
 
 func _on_range_body_exited(body: Node2D) -> void:
 	if body is Seed:
 		is_in_range = false
+		print("isNotInRange")
 		target_object = null

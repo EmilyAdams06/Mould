@@ -2,13 +2,24 @@
 
 [ext_resource type="Script" uid="uid://dsgktytvu71hv" path="res://Scripts/hawk.gd" id="1_5mrjw"]
 [ext_resource type="Texture2D" uid="uid://bnhpfta88bxww" path="res://Assets/Sprites/enemy_hawk.png" id="2_5mrjw"]
-[ext_resource type="Script" uid="uid://bslfjp0qjn57g" path="res://Scenes/behavior.gd" id="3_5rcmg"]
+[ext_resource type="Script" uid="uid://bslfjp0qjn57g" path="res://Scripts/behavior.gd" id="3_5rcmg"]
 [ext_resource type="Script" uid="uid://8mq45pf1jbav" path="res://Scripts/idle.gd" id="4_akegv"]
 [ext_resource type="Script" uid="uid://bssf4x8wngmeq" path="res://Scripts/Attack.gd" id="5_imrqw"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_s2hgq"]
+radius = 4.609772
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tt62d"]
-radius = 7.0
-height = 14.0
+radius = 9.0
+height = 18.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qfy2"]
+atlas = ExtResource("2_5mrjw")
+region = Rect2(0, 51, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_od6ow"]
+atlas = ExtResource("2_5mrjw")
+region = Rect2(17, 51, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jknxg"]
 atlas = ExtResource("2_5mrjw")
@@ -40,6 +51,17 @@ region = Rect2(51, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_s2hgq"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6qfy2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_od6ow")
+}],
+"loop": 1,
+"name": &"Attack",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jknxg")
@@ -81,11 +103,17 @@ animations = [{
 safe_margin = 0.07
 script = ExtResource("1_5mrjw")
 
+[node name="AttackRange" type="Area2D" parent="." unique_id=1408388171]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange" unique_id=284963521]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_s2hgq")
+
 [node name="DetectionArea" type="Area2D" parent="." unique_id=1691266832]
 z_index = 1
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DetectionArea" unique_id=1764056972]
-polygon = PackedVector2Array(3, 6, 177, 7, 294, 170, -178, 187, -90, 10)
+polygon = PackedVector2Array(3, 6, 85, -63, 140, 175, -113, 174, -63, -58)
 
 [node name="Behavior" type="Node" parent="." unique_id=657092735 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_5rcmg")
@@ -107,5 +135,9 @@ shape = SubResource("CapsuleShape2D_tt62d")
 position = Vector2(1.5, -3.0000002)
 scale = Vector2(1.4375, 1.3749999)
 sprite_frames = SubResource("SpriteFrames_s2hgq")
-animation = &"Glide"
+animation = &"Attack"
 autoplay = "default"
+frame_progress = 0.34230772
+
+[connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
+[connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]
