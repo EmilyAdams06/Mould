@@ -1,0 +1,143 @@
+[gd_scene format=3 uid="uid://pa7vyqrigct"]
+
+[ext_resource type="Script" uid="uid://drbrpf6fjqmqi" path="res://Scripts/corrupt_hawk.gd" id="1_y7mof"]
+[ext_resource type="Script" uid="uid://bslfjp0qjn57g" path="res://Scripts/AI/Hawk/behavior.gd" id="2_74xea"]
+[ext_resource type="Script" uid="uid://8mq45pf1jbav" path="res://Scripts/AI/Hawk/idle.gd" id="3_55oqf"]
+[ext_resource type="Script" uid="uid://bssf4x8wngmeq" path="res://Scripts/AI/Hawk/Attack.gd" id="4_alevm"]
+[ext_resource type="Texture2D" uid="uid://bnhpfta88bxww" path="res://Assets/Sprites/enemy_hawk.png" id="5_cpnq0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s2hgq"]
+radius = 4.609772
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tt62d"]
+radius = 9.0
+height = 18.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qfy2"]
+atlas = ExtResource("5_cpnq0")
+region = Rect2(0, 51, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_od6ow"]
+atlas = ExtResource("5_cpnq0")
+region = Rect2(17, 51, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jknxg"]
+atlas = ExtResource("5_cpnq0")
+region = Rect2(0, 85, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gsc0k"]
+atlas = ExtResource("5_cpnq0")
+region = Rect2(17, 85, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hyupp"]
+atlas = ExtResource("5_cpnq0")
+region = Rect2(17, 85, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rcmg"]
+atlas = ExtResource("5_cpnq0")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akegv"]
+atlas = ExtResource("5_cpnq0")
+region = Rect2(17, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imrqw"]
+atlas = ExtResource("5_cpnq0")
+region = Rect2(34, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6gr3"]
+atlas = ExtResource("5_cpnq0")
+region = Rect2(51, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s2hgq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6qfy2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_od6ow")
+}],
+"loop": 1,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jknxg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gsc0k")
+}],
+"loop": 1,
+"name": &"Flappy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hyupp")
+}],
+"loop": 1,
+"name": &"Glide",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5rcmg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akegv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_imrqw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6gr3")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="Corrupt" type="CharacterBody2D" unique_id=1174032302]
+safe_margin = 0.07
+script = ExtResource("1_y7mof")
+
+[node name="AttackRange" type="Area2D" parent="." unique_id=1408388171]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange" unique_id=284963521]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_s2hgq")
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1691266832]
+z_index = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DetectionArea" unique_id=1764056972]
+polygon = PackedVector2Array(3, 6, 85, -63, 140, 175, -113, 174, -63, -58)
+
+[node name="Behavior" type="Node" parent="." unique_id=657092735 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_74xea")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="Behavior" unique_id=759059973]
+script = ExtResource("3_55oqf")
+metadata/_custom_type_script = "uid://8mq45pf1jbav"
+
+[node name="Attack" type="Node" parent="Behavior" unique_id=985517829 node_paths=PackedStringArray("hawk")]
+script = ExtResource("4_alevm")
+hawk = NodePath("../..")
+metadata/_custom_type_script = "uid://bssf4x8wngmeq"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=192598586]
+shape = SubResource("CapsuleShape2D_tt62d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D" unique_id=799523263]
+position = Vector2(1.5, -3.0000002)
+scale = Vector2(1.4375, 1.3749999)
+sprite_frames = SubResource("SpriteFrames_s2hgq")
+animation = &"Attack"
+autoplay = "default"
+frame_progress = 0.34230772
+
+[connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
+[connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]

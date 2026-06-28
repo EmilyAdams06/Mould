@@ -1,5 +1,5 @@
 extends Node
-class_name State
+class_name CorruptHawkState
 
 signal Transitioned
 var state_machine

@@ -17,10 +17,15 @@ var health = 100.0
 var energy = 100.0
 var is_in_range: bool = false
 
+var damage_timer = -1.0
+
 var target_object: Node2D
 
 func receive_damage(amount: int) -> void:
 	health -= amount
+	$AnimatedSprite2D.animation = &"Damage"
+	$AnimatedSprite2D.modulate = Color(1.0, 0.5, 0.5, 1.0)
+	damage_timer = 0.3
 	if health <= 0:
 		die()
 
@@ -30,7 +35,11 @@ func die() -> void:
 	energy = maxEnergy
 
 func _physics_process(delta: float) -> void:
-	var direction := Input.get_axis("ui_left", "ui_right")
+	damage_timer -= delta
+	if damage_timer > 0.0: return
+	$AnimatedSprite2D.modulate = Color(1.0,1.0,1.0,1.0)
+	
+	var direction := Input.get_axis("move_left", "move_right")
 	# Add the gravity.
 	if not is_on_floor():
 		if Input.is_action_pressed("dive") and energy > 0:
@@ -60,9 +69,6 @@ func _physics_process(delta: float) -> void:
 			print("Yum")
 			energy += 10
 			target_object.queue_free()
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	
 	if direction:
 		velocity.x = lerp(velocity.x, direction * SPEED, delta)

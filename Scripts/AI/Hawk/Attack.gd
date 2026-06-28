@@ -1,8 +1,7 @@
-extends State
+extends HawkState
 class_name Attack
 
 @export var hawk: Hawk
-@export var swoop_speed := 300.0
 @export var swoop_distance := 150.0
 @export var attack_success = false
 
@@ -25,11 +24,11 @@ func Update(delta: float):
 	
 	# move towards player
 	var direction = (hawk.detected_player.global_position - hawk.global_position).normalized()
-	hawk.velocity = direction * swoop_speed
+	hawk.velocity = direction * hawk.SWOOP_SPEED
 	hawk.set_animation("Attack")
 	
 	# track distance traveled
-	distance_traveled += (direction * swoop_speed * delta).length()
+	distance_traveled += (direction * hawk.SWOOP_SPEED * delta).length()
 			
 	#if distance_traveled >= swoop_distance: # if swoop distance reached, return to idle
 		#Transitioned.emit(self, "idle")

@@ -1,13 +1,13 @@
 extends Node
 
-var current_state : State
+var current_state : HawkState
 var states : Dictionary = {}
 
-@export var initial_state : State
+@export var initial_state : HawkState
 
 func _ready():
 	for child in get_children():
-		if child is State:
+		if child is HawkState:
 			states[child.name.to_lower()] = child
 			child.Transitioned.connect(on_child_transition)
 			

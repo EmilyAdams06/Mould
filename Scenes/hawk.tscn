@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://qhewh0hqu6w7"]
 
 [ext_resource type="Script" uid="uid://dsgktytvu71hv" path="res://Scripts/hawk.gd" id="1_5mrjw"]
-[ext_resource type="Texture2D" uid="uid://bnhpfta88bxww" path="res://Assets/Sprites/enemy_hawk.png" id="2_5mrjw"]
-[ext_resource type="Script" uid="uid://bslfjp0qjn57g" path="res://Scripts/behavior.gd" id="3_5rcmg"]
-[ext_resource type="Script" uid="uid://8mq45pf1jbav" path="res://Scripts/idle.gd" id="4_akegv"]
-[ext_resource type="Script" uid="uid://bssf4x8wngmeq" path="res://Scripts/Attack.gd" id="5_imrqw"]
+[ext_resource type="Script" uid="uid://bslfjp0qjn57g" path="res://Scripts/AI/Hawk/behavior.gd" id="3_5rcmg"]
+[ext_resource type="Script" uid="uid://8mq45pf1jbav" path="res://Scripts/AI/Hawk/idle.gd" id="4_akegv"]
+[ext_resource type="Script" uid="uid://bssf4x8wngmeq" path="res://Scripts/AI/Hawk/Attack.gd" id="5_imrqw"]
+[ext_resource type="SpriteFrames" uid="uid://ciwy8csndjr07" path="res://Assets/HawkAnimations/base_hawk.tres" id="5_v6gr3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s2hgq"]
 radius = 4.609772
@@ -13,95 +13,10 @@ radius = 4.609772
 radius = 9.0
 height = 18.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6qfy2"]
-atlas = ExtResource("2_5mrjw")
-region = Rect2(0, 51, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_od6ow"]
-atlas = ExtResource("2_5mrjw")
-region = Rect2(17, 51, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jknxg"]
-atlas = ExtResource("2_5mrjw")
-region = Rect2(0, 85, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gsc0k"]
-atlas = ExtResource("2_5mrjw")
-region = Rect2(17, 85, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hyupp"]
-atlas = ExtResource("2_5mrjw")
-region = Rect2(17, 85, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5rcmg"]
-atlas = ExtResource("2_5mrjw")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_akegv"]
-atlas = ExtResource("2_5mrjw")
-region = Rect2(17, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_imrqw"]
-atlas = ExtResource("2_5mrjw")
-region = Rect2(34, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v6gr3"]
-atlas = ExtResource("2_5mrjw")
-region = Rect2(51, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_s2hgq"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6qfy2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_od6ow")
-}],
-"loop": 1,
-"name": &"Attack",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jknxg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gsc0k")
-}],
-"loop": 1,
-"name": &"Flappy",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hyupp")
-}],
-"loop": 1,
-"name": &"Glide",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5rcmg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_akegv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_imrqw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v6gr3")
-}],
-"loop": 1,
-"name": &"default",
-"speed": 2.0
-}]
-
 [node name="Hawk" type="CharacterBody2D" unique_id=1174032302]
 safe_margin = 0.07
 script = ExtResource("1_5mrjw")
+type = "Normal"
 
 [node name="AttackRange" type="Area2D" parent="." unique_id=1408388171]
 
@@ -134,10 +49,8 @@ shape = SubResource("CapsuleShape2D_tt62d")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D" unique_id=799523263]
 position = Vector2(1.5, -3.0000002)
 scale = Vector2(1.4375, 1.3749999)
-sprite_frames = SubResource("SpriteFrames_s2hgq")
-animation = &"Attack"
+sprite_frames = ExtResource("5_v6gr3")
 autoplay = "default"
-frame_progress = 0.34230772
 
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
 [connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]

@@ -1273,3 +1273,7 @@ position = Vector2(124, 167)
 
 [node name="Hawk" parent="." unique_id=1174032302 instance=ExtResource("9_ynf5e")]
 position = Vector2(349, 171)
+
+[node name="HawkTuah" parent="." unique_id=1130003354 instance=ExtResource("9_ynf5e")]
+position = Vector2(644, 144)
+type = "Corrupt"
