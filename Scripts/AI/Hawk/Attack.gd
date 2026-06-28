@@ -1,4 +1,4 @@
-extends State
+extends HawkState
 class_name Attack
 
 @export var hawk: Hawk

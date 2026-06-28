@@ -7,6 +7,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tt62d"]
 size = Vector2(16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_l1rcp"]
+atlas = ExtResource("1_lkv7d")
+region = Rect2(187, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_nytcm"]
 atlas = ExtResource("1_lkv7d")
 region = Rect2(68, 0, 16, 16)
@@ -49,6 +53,14 @@ region = Rect2(17, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tt62d"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l1rcp")
+}],
+"loop": 1,
+"name": &"Damage",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nytcm")
@@ -121,6 +133,7 @@ shape = SubResource("RectangleShape2D_tt62d")
 texture_filter = 1
 position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_tt62d")
+animation = &"Damage"
 autoplay = "default"
 
 [node name="Range" type="Area2D" parent="." unique_id=637441575 groups=["player"]]

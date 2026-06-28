@@ -1,4 +1,4 @@
-extends State
+extends HawkState
 class_name Idle
 
 @export var hawk: CharacterBody2D

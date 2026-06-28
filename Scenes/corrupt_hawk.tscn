@@ -1,10 +1,10 @@
-[gd_scene format=3 uid="uid://qhewh0hqu6w7"]
+[gd_scene format=3 uid="uid://pa7vyqrigct"]
 
-[ext_resource type="Script" uid="uid://dsgktytvu71hv" path="res://Scripts/hawk.gd" id="1_5mrjw"]
-[ext_resource type="Texture2D" uid="uid://bnhpfta88bxww" path="res://Assets/Sprites/enemy_hawk.png" id="2_5mrjw"]
-[ext_resource type="Script" uid="uid://bslfjp0qjn57g" path="res://Scripts/AI/Hawk/behavior.gd" id="3_5rcmg"]
-[ext_resource type="Script" uid="uid://8mq45pf1jbav" path="res://Scripts/AI/Hawk/idle.gd" id="4_akegv"]
-[ext_resource type="Script" uid="uid://bssf4x8wngmeq" path="res://Scripts/AI/Hawk/Attack.gd" id="5_imrqw"]
+[ext_resource type="Script" uid="uid://drbrpf6fjqmqi" path="res://Scripts/corrupt_hawk.gd" id="1_y7mof"]
+[ext_resource type="Script" uid="uid://bslfjp0qjn57g" path="res://Scripts/AI/Hawk/behavior.gd" id="2_74xea"]
+[ext_resource type="Script" uid="uid://8mq45pf1jbav" path="res://Scripts/AI/Hawk/idle.gd" id="3_55oqf"]
+[ext_resource type="Script" uid="uid://bssf4x8wngmeq" path="res://Scripts/AI/Hawk/Attack.gd" id="4_alevm"]
+[ext_resource type="Texture2D" uid="uid://bnhpfta88bxww" path="res://Assets/Sprites/enemy_hawk.png" id="5_cpnq0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s2hgq"]
 radius = 4.609772
@@ -14,39 +14,39 @@ radius = 9.0
 height = 18.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6qfy2"]
-atlas = ExtResource("2_5mrjw")
+atlas = ExtResource("5_cpnq0")
 region = Rect2(0, 51, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_od6ow"]
-atlas = ExtResource("2_5mrjw")
+atlas = ExtResource("5_cpnq0")
 region = Rect2(17, 51, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jknxg"]
-atlas = ExtResource("2_5mrjw")
+atlas = ExtResource("5_cpnq0")
 region = Rect2(0, 85, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gsc0k"]
-atlas = ExtResource("2_5mrjw")
+atlas = ExtResource("5_cpnq0")
 region = Rect2(17, 85, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hyupp"]
-atlas = ExtResource("2_5mrjw")
+atlas = ExtResource("5_cpnq0")
 region = Rect2(17, 85, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5rcmg"]
-atlas = ExtResource("2_5mrjw")
+atlas = ExtResource("5_cpnq0")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_akegv"]
-atlas = ExtResource("2_5mrjw")
+atlas = ExtResource("5_cpnq0")
 region = Rect2(17, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_imrqw"]
-atlas = ExtResource("2_5mrjw")
+atlas = ExtResource("5_cpnq0")
 region = Rect2(34, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v6gr3"]
-atlas = ExtResource("2_5mrjw")
+atlas = ExtResource("5_cpnq0")
 region = Rect2(51, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_s2hgq"]
@@ -99,9 +99,9 @@ animations = [{
 "speed": 2.0
 }]
 
-[node name="Hawk" type="CharacterBody2D" unique_id=1174032302]
+[node name="Corrupt" type="CharacterBody2D" unique_id=1174032302]
 safe_margin = 0.07
-script = ExtResource("1_5mrjw")
+script = ExtResource("1_y7mof")
 
 [node name="AttackRange" type="Area2D" parent="." unique_id=1408388171]
 
@@ -116,15 +116,15 @@ z_index = 1
 polygon = PackedVector2Array(3, 6, 85, -63, 140, 175, -113, 174, -63, -58)
 
 [node name="Behavior" type="Node" parent="." unique_id=657092735 node_paths=PackedStringArray("initial_state")]
-script = ExtResource("3_5rcmg")
+script = ExtResource("2_74xea")
 initial_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="Behavior" unique_id=759059973]
-script = ExtResource("4_akegv")
+script = ExtResource("3_55oqf")
 metadata/_custom_type_script = "uid://8mq45pf1jbav"
 
 [node name="Attack" type="Node" parent="Behavior" unique_id=985517829 node_paths=PackedStringArray("hawk")]
-script = ExtResource("5_imrqw")
+script = ExtResource("4_alevm")
 hawk = NodePath("../..")
 metadata/_custom_type_script = "uid://bssf4x8wngmeq"
 
@@ -137,7 +137,7 @@ scale = Vector2(1.4375, 1.3749999)
 sprite_frames = SubResource("SpriteFrames_s2hgq")
 animation = &"Attack"
 autoplay = "default"
-frame_progress = 0.89450413
+frame_progress = 0.34230772
 
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
 [connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]

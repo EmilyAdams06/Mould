@@ -17,10 +17,15 @@ var health = 100.0
 var energy = 100.0
 var is_in_range: bool = false
 
+var damage_timer = -1.0
+
 var target_object: Node2D
 
 func receive_damage(amount: int) -> void:
 	health -= amount
+	$AnimatedSprite2D.animation = &"Damage"
+	$AnimatedSprite2D.modulate = Color(1.0, 0.5, 0.5, 1.0)
+	damage_timer = 0.3
 	if health <= 0:
 		die()
 
@@ -30,6 +35,10 @@ func die() -> void:
 	energy = maxEnergy
 
 func _physics_process(delta: float) -> void:
+	damage_timer -= delta
+	if damage_timer > 0.0: return
+	$AnimatedSprite2D.modulate = Color(1.0,1.0,1.0,1.0)
+	
 	var direction := Input.get_axis("ui_left", "ui_right")
 	# Add the gravity.
 	if not is_on_floor():
