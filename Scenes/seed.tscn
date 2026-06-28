@@ -3,20 +3,29 @@
 [ext_resource type="Script" uid="uid://duo4fx8b667wb" path="res://Scripts/seed.gd" id="1_arhpd"]
 [ext_resource type="Texture2D" uid="uid://rvq8cug6133y" path="res://Assets/Sprites/foilage.png" id="2_nwbkr"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_oxpsm"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7eo7"]
 atlas = ExtResource("2_nwbkr")
-region = Rect2(0.77552795, 56.769836, 13.087978, 13.217094)
+region = Rect2(1.9914055, 58.647694, 10.056286, 8.3323555)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7s7a"]
+atlas = ExtResource("2_nwbkr")
+region = Rect2(19.771996, 60.242737, 12.408966, 9.306725)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfeiy"]
+atlas = ExtResource("2_nwbkr")
+region = Rect2(55.307106, 60.904762, 11.58889, 8.180389)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s2hgq"]
-radius = 0.0
+radius = 3.0
 
 [node name="Seed" type="RigidBody2D" unique_id=1675158719]
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_arhpd")
+textures = Array[Texture2D]([SubResource("AtlasTexture_n7eo7"), SubResource("AtlasTexture_l7s7a"), SubResource("AtlasTexture_gfeiy")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=60215078]
-texture = SubResource("AtlasTexture_oxpsm")
+texture = SubResource("AtlasTexture_n7eo7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=198663318]
 shape = SubResource("CircleShape2D_s2hgq")

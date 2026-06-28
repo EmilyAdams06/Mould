@@ -58,8 +58,10 @@ animations = [{
 }]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" unique_id=1797197836]
+visible = false
 modulate = Color(1, 1, 1, 0.57254905)
-z_index = 1
+clip_children = 1
+z_index = -1
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_tt62d")
 animation = &"Water"

@@ -80,6 +80,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("dive"):
 			print("Yum")
 			energy += 10
+			health += 5
 			target_object.queue_free()
 	
 	if direction:
