@@ -214,6 +214,7 @@ step = 1.0
 show_percentage = false
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1475729804]
+modulate = Color(1, 1, 1, 0)
 
 [node name="RFist" type="Area2D" parent="." unique_id=1324129349]
 
