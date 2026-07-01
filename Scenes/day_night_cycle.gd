@@ -9,7 +9,8 @@ var time_rate : float
 var sun : DirectionalLight2D
 @export var sun_color : Gradient 
 @export var sun_intensity : Curve
-
+var sunSprite : Sprite2D
+	
 # moon
 var moon : DirectionalLight2D
 @export var moon_color : Gradient 
@@ -32,6 +33,23 @@ var environment : ColorRect
 @onready var night_rect : TextureRect = canvas.get_node("nightRect")
 @onready var sunset_rect : TextureRect = canvas.get_node("sunsetRect")
 
+# set sun/moon sprites
+@onready var sun_sprite : Node2D = get_node("CanvasLayer/sunPath/sunFollow/sunSprite")
+@onready var moon_sprite : Node2D = get_node("CanvasLayer/moonPath/moonSprite")
+
+# sun/moon follow spline
+@onready var sun_follow: PathFollow2D = get_node("CanvasLayer/sunPath/sunFollow")
+@onready var moon_follow: PathFollow2D = get_node("CanvasLayer/moonPath/moonFollow")
+
+# sun/moon sprite sky relativity config 
+@export var sky_center : Vector2 = Vector2(300, 90) 
+@export var sky_radius : Vector2 = Vector2(240, 100)
+@export var sun_arc_center_angle : float = 50.0
+@export var sun_arc_span : float = 180.0
+@export var moon_arc_span : float = 180.0
+@export var moon_radius : Vector2 = Vector2(600, 250)
+@export var moon_arc_center_angle : float = 220.0
+# day/night background time configuration
 @export_range(0.0, 1.0) var sunrise_start := 0.13
 @export_range(0.0, 1.0) var sunrise_end   := 0.30
 @export_range(0.0, 1.0) var sunset_start  := 0.62
@@ -77,6 +95,9 @@ func _fade(a: float, b: float, t: float) -> float:
 		return 1.0 if t >= b else 0.0
 	return clamp((t-a) / (b-a), 0.0, 1.0)
 
+func fract(x: float) -> float:
+		return x - floor(x)
+		
 func _update_sky(t: float) -> void:
 	# normalize t to 0..1 (safety)
 	t = wrapf(t, 0.0, 1.0)
@@ -117,8 +138,13 @@ func _update_sky(t: float) -> void:
 	night_rect.modulate.a = alpha_night
 	sunset_rect.modulate.a = alpha_sunset_final
 
-	
-		
+func _arc_pos(t: float, center_angle_deg: float, span_deg: float) -> Vector2:
+	var angle_deg := -1*(center_angle_deg + (t-0.5) * span_deg)
+	var angle := deg_to_rad(angle_deg) # convert degrees to radians
+	print(angle_deg)
+	print(angle)
+	return sky_center + Vector2(cos(angle) * sky_radius.x, -sin(angle) * sky_radius.y)	
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	time += time_rate * delta
@@ -149,5 +175,23 @@ func _process(delta: float) -> void:
 			yearDay = 0
 			
 	totalDay = totalDay + 1 # add to total days survived counter
+	
+	#var sun_pos := _arc_pos(time, sun_arc_center_angle, sun_arc_span)
+	#var moon_pos := _arc_pos(time, moon_arc_center_angle, moon_arc_span)
+	#print(sun_pos)
+	#sun_sprite.position = sun_pos
+	#moon_sprite.position = moon_pos
+	# time is 0..1 over a day
+	#if(time > sunrise_start && time < sunset_end) :
+	sun_follow.progress_ratio = (1-time-0.25)
+	#else :
+	moon_follow.progress_ratio = fract((1-time) + 0.5) # opposite phase
+
+	# simple "below horizon" hide
+	#var sun_t := (sun_pos.y - sky_center.y) / sky_radius.y
+	#var moon_t := (moon_pos.y - sky_center.y) / moon_radius.y
+	#sun_sprite.visible = sun_t > 0.0
+	#moon_sprite.visible = moon_t > 0.0
+
+
 	_update_sky(time)
-		

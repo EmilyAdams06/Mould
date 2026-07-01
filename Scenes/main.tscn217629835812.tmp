@@ -55,12 +55,6 @@ sky = SubResource("Sky_xwdq4")
 ambient_light_color = Color(0.8132577, 0.8132577, 0.81325763, 1)
 fog_light_energy = 1.41
 
-[sub_resource type="Curve2D" id="Curve2D_tsydr"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 347.0741, 117.586136, 0, 0, 0, 0, 309.2572, -32.352966, 0, 0, 0, 0, 280.72867, -86.69331, 0, 0, 0, 0, 248.88287, -117.8887, 0, 0, 0, 0, 223.00815, -140.02736, 0, 0, 0, 0, 197.79688, -145.05887, 0, 0, 0, 0, 155.99925, -137.00845, 0, 0, 0, 0, 107.56708, -98.76895, 0, 0, 0, 0, 59.134914, -16.252121, 0, 0, 0, 0, 12.693113, 105.51051, 0, 0, 0, 0, 39.89474, 144.7563, 0, 0, 0, 0, 262.8154, 146.7689, 0, 0, 0, 0, 339.11267, 131.67436)
-}
-point_count = 13
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8gbba"]
 texture = ExtResource("2_bo1nx")
 separation = Vector2i(1, 1)
@@ -1544,39 +1538,13 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0.23921569, 0.92941177, 1)
 
-[node name="sunPath" type="Path2D" parent="DayNightCycle/CanvasLayer" unique_id=382876373]
-position = Vector2(22.868145, 173.15033)
-scale = Vector2(1.5072627, 0.9937368)
-curve = SubResource("Curve2D_tsydr")
-
-[node name="sunFollow" type="PathFollow2D" parent="DayNightCycle/CanvasLayer/sunPath" unique_id=1202754242]
-position = Vector2(347.0741, 117.586136)
-rotation = -1.9305128
-rotates = false
-
-[node name="sunSprite" type="Sprite2D" parent="DayNightCycle/CanvasLayer/sunPath/sunFollow" unique_id=1468625404]
-position = Vector2(-7.9548383, -0.95141244)
-rotation = 1.9198622
-scale = Vector2(1.0372282, 1.4925089)
+[node name="sunSprite" type="Sprite2D" parent="DayNightCycle/CanvasLayer" unique_id=1468625404]
+position = Vector2(421, 33)
 texture = ExtResource("5_h1bgf")
 vframes = 6
 
-[node name="moonPath" type="Path2D" parent="DayNightCycle/CanvasLayer" unique_id=434457040]
-visible = false
-position = Vector2(22.868145, 173.15033)
-scale = Vector2(1.5072627, 0.9937368)
-curve = SubResource("Curve2D_tsydr")
-
-[node name="moonFollow" type="PathFollow2D" parent="DayNightCycle/CanvasLayer/moonPath" unique_id=839254220]
-position = Vector2(347.0741, 117.586136)
-rotation = -2.0770197
-rotates = false
-loop = false
-
-[node name="moonSprite" type="Sprite2D" parent="DayNightCycle/CanvasLayer/moonPath/moonFollow" unique_id=1625496239]
-position = Vector2(2.8759625, 1.5420778)
-rotation = 2.0629792
-scale = Vector2(1, 1.2039566)
+[node name="moonSprite" type="Sprite2D" parent="DayNightCycle/CanvasLayer" unique_id=2117310518]
+position = Vector2(421, 33)
 texture = ExtResource("5_h1bgf")
 vframes = 6
 
