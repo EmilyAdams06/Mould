@@ -51,22 +51,28 @@ func _physics_process(delta: float) -> void:
 	
 	var direction := Input.get_axis("move_left", "move_right")
 	# Add the gravity.
+	# Layer 5 is all platforms, tree or not
 	if not is_on_floor():
 		if Input.is_action_pressed("dive") and energy > 0:
 			velocity += get_gravity() * delta
 			$AnimatedSprite2D.animation = &"Dive"
 			energy -= DIVE_COST * delta
+			set_collision_mask_value(5, false)
 		else:
 			velocity += get_gravity() * GLIDE_FACTOR * delta
 			$AnimatedSprite2D.animation = &"Flap"
+			set_collision_mask_value(5, true)
 
 	if is_on_floor():
 		if Input.is_action_pressed("dive"):
 			$AnimatedSprite2D.animation = &"Peck"
+			set_collision_mask_value(5, false)
 		elif direction:
 			$AnimatedSprite2D.animation = &"Walk"
+			set_collision_mask_value(5, true)
 		else:
 			$AnimatedSprite2D.animation = &"default"
+			set_collision_mask_value(5, true)
 
 	# Handle jump.
 	if Input.is_action_just_pressed("flap") and energy > 0:
