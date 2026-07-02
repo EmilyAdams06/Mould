@@ -23,6 +23,10 @@ var attack_timer = -1.0
 
 var target_object: Node2D
 
+# indicator setup 
+#var indicator_Sprite : AnimatedSprite2D
+@onready var indicator_Sprite : Node2D = get_node("AnimatedSprite2D/indicatorSprite")
+
 func receive_damage(amount: int) -> void:
 	if attack_timer < 0.1:
 		health -= amount
@@ -125,6 +129,7 @@ func _on_range_body_entered(body: Node2D) -> void:
 		is_in_range = true
 		print("isInRange")
 		target_object = body
+		indicator_Sprite.play("see_food")
 
 
 func _on_range_body_exited(body: Node2D) -> void:
@@ -132,3 +137,4 @@ func _on_range_body_exited(body: Node2D) -> void:
 		is_in_range = false
 		print("isNotInRange")
 		target_object = null
+		indicator_Sprite.play("none")
