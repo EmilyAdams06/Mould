@@ -176,6 +176,18 @@ region = Rect2(0, 0, 16, 16)
 atlas = ExtResource("3_nytcm")
 region = Rect2(17, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_l51qt"]
+atlas = ExtResource("3_nytcm")
+region = Rect2(0, 102, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3gmt"]
+atlas = ExtResource("3_nytcm")
+region = Rect2(17, 102, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xufk"]
+atlas = ExtResource("3_nytcm")
+region = Rect2(34, 102, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_nw3qc"]
 atlas = ExtResource("3_nytcm")
 region = Rect2(0, 68, 16, 16)
@@ -203,6 +215,22 @@ region = Rect2(0, 136, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_bagv5"]
 atlas = ExtResource("3_nytcm")
 region = Rect2(17, 136, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dq5a7"]
+atlas = ExtResource("3_nytcm")
+region = Rect2(0, 119, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_80j7h"]
+atlas = ExtResource("3_nytcm")
+region = Rect2(17, 119, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oslv8"]
+atlas = ExtResource("3_nytcm")
+region = Rect2(34, 119, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t521p"]
+atlas = ExtResource("3_nytcm")
+region = Rect2(51, 119, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_et0tf"]
 atlas = ExtResource("3_nytcm")
@@ -253,6 +281,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_l51qt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3gmt")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_1xufk")
+}],
+"loop": 1,
+"name": &"get_seed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_nw3qc")
 }, {
 "duration": 1.0,
@@ -293,6 +335,23 @@ animations = [{
 }],
 "loop": 1,
 "name": &"see_food",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dq5a7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_80j7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oslv8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t521p")
+}],
+"loop": 1,
+"name": &"sing",
 "speed": 5.0
 }, {
 "frames": [{
@@ -346,10 +405,10 @@ autoplay = "default"
 [node name="indicatorSprite" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1088283493]
 light_mask = 0
 z_index = 5
-position = Vector2(0, -17.042)
+position = Vector2(0, -15.042)
 sprite_frames = SubResource("SpriteFrames_owm7s")
-animation = &"none"
-frame_progress = 0.2634275
+animation = &"sing"
+frame_progress = 0.9663298
 
 [node name="Range" type="Area2D" parent="." unique_id=637441575 groups=["player"]]
 

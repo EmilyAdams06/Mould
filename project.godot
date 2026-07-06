@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="pio_story"
-run/main_scene="uid://n26bam3gfnx4"
+run/main_scene="uid://dq5w62srrq2nh"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
