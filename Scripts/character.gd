@@ -2,7 +2,7 @@ class_name Character
 
 extends CharacterBody2D
 
-#cum
+#cums
 #Variables
 @export var maxEnergy = 100
 @export var maxHealth = 100
