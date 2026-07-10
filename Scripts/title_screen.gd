@@ -3,7 +3,7 @@ extends Control
 @onready var character_data = Customization.character_data
 
 func _on_play_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/main.tscn")
+	get_tree().change_scene_to_file("res://Scenes/level_overworld.scn")
 
 
 func _on_quit_pressed() -> void:
