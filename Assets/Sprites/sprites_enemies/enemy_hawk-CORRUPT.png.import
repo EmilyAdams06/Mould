@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dadke5b6i7nna"
-path="res://.godot/imported/enemy_fungolite.png-c5852cc73108172dec451dee86631b3b.ctex"
+uid="uid://cygksqrbwdv8y"
+path="res://.godot/imported/enemy_hawk-CORRUPT.png-58e36fe426cd488735b6250a265a2778.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/enemy_fungolite.png"
-dest_files=["res://.godot/imported/enemy_fungolite.png-c5852cc73108172dec451dee86631b3b.ctex"]
+source_file="res://Assets/Sprites/sprites_enemies/enemy_hawk-CORRUPT.png"
+dest_files=["res://.godot/imported/enemy_hawk-CORRUPT.png-58e36fe426cd488735b6250a265a2778.ctex"]
 
 [params]
 

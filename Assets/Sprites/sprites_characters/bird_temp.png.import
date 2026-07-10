@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnhpfta88bxww"
-path="res://.godot/imported/enemy_hawk.png-0db11c39529c03e17f7d9d90ce174b46.ctex"
+uid="uid://be3mse05fwoin"
+path="res://.godot/imported/bird_temp.png-8f1246c7c309a05b0b59e49e3a80493e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/enemy_hawk.png"
-dest_files=["res://.godot/imported/enemy_hawk.png-0db11c39529c03e17f7d9d90ce174b46.ctex"]
+source_file="res://Assets/Sprites/sprites_characters/bird_temp.png"
+dest_files=["res://.godot/imported/bird_temp.png-8f1246c7c309a05b0b59e49e3a80493e.ctex"]
 
 [params]
 

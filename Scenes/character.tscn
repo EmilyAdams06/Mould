@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://84g7gficdc8"]
 
-[ext_resource type="Texture2D" uid="uid://cewleiqtpuv3p" path="res://Assets/Sprites/bird_sheet.png" id="1_lkv7d"]
+[ext_resource type="Texture2D" uid="uid://cewleiqtpuv3p" path="res://Assets/Sprites/sprites_characters/bird_sheet.png" id="1_lkv7d"]
 [ext_resource type="Script" uid="uid://b40qfgatdd5jt" path="res://Scripts/character.gd" id="1_ushfy"]
 [ext_resource type="Texture2D" uid="uid://sty8falfn6vw" path="res://Assets/Sprites/UI/UI_indicators.png" id="3_nytcm"]
 [ext_resource type="Script" uid="uid://dsimp6fkjvsrc" path="res://Scripts/HUD.gd" id="3_owm7s"]

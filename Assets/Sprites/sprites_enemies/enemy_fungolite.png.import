@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cewleiqtpuv3p"
-path="res://.godot/imported/bird_sheet.png-e1abf2e29e7bf1b301cba2d70f813d6c.ctex"
+uid="uid://dadke5b6i7nna"
+path="res://.godot/imported/enemy_fungolite.png-46b02696db2ed2d466f58d12b543ff59.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/bird_sheet.png"
-dest_files=["res://.godot/imported/bird_sheet.png-e1abf2e29e7bf1b301cba2d70f813d6c.ctex"]
+source_file="res://Assets/Sprites/sprites_enemies/enemy_fungolite.png"
+dest_files=["res://.godot/imported/enemy_fungolite.png-46b02696db2ed2d466f58d12b543ff59.ctex"]
 
 [params]
 

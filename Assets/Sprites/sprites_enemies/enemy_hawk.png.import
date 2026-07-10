@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cygksqrbwdv8y"
-path="res://.godot/imported/enemy_hawk-CORRUPT.png-ca2f855769cbd38a74a288e598378342.ctex"
+uid="uid://bnhpfta88bxww"
+path="res://.godot/imported/enemy_hawk.png-a3a02f24f4f376b29e95ccd7dd90b07d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/enemy_hawk-CORRUPT.png"
-dest_files=["res://.godot/imported/enemy_hawk-CORRUPT.png-ca2f855769cbd38a74a288e598378342.ctex"]
+source_file="res://Assets/Sprites/sprites_enemies/enemy_hawk.png"
+dest_files=["res://.godot/imported/enemy_hawk.png-a3a02f24f4f376b29e95ccd7dd90b07d.ctex"]
 
 [params]
 

@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://d0mrv3mqk3elf"]
 
-[ext_resource type="Texture2D" uid="uid://cygksqrbwdv8y" path="res://Assets/Sprites/enemy_hawk-CORRUPT.png" id="1_hsa1c"]
+[ext_resource type="Texture2D" uid="uid://cygksqrbwdv8y" path="res://Assets/Sprites/sprites_enemies/enemy_hawk-CORRUPT.png" id="1_hsa1c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w4lv1"]
 atlas = ExtResource("1_hsa1c")
