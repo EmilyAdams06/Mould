@@ -25,7 +25,18 @@ var target_object: Node2D
 
 # indicator setup 
 #var indicator_Sprite : AnimatedSprite2D
-@onready var indicator_Sprite : Node2D = get_node("AnimatedSprite2D/indicatorSprite")
+@onready var indicator_Sprite : Node2D = get_node("indicatorSprite")
+#@onready var base_sprite : AnimatedSprite2D = get_node("AnimatedSprite2D")
+
+func _ready() -> void:
+	Customization.color_updated.connect(_on_color_updated)
+	_update_color(Customization.character_data.color)
+	
+func _on_color_updated(color: Color) -> void:
+	_update_color(color)
+	
+func _update_color(color: Color) -> void:
+	$AnimatedSprite2D.modulate = color
 
 func receive_damage(amount: int) -> void:
 	if attack_timer < 0.1:
@@ -51,7 +62,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			$AnimatedSprite2D.animation = &"Attack"
 		return
-	$AnimatedSprite2D.modulate = Color(1.0,1.0,1.0,1.0)
+	#$AnimatedSprite2D.modulate = Color(1.0,1.0,1.0,1.0)
 	
 	var direction := Input.get_axis("move_left", "move_right")
 	# Add the gravity.
