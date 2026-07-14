@@ -7,4 +7,5 @@ extends RigidBody2D
 func _ready() -> void:
 	var sprite = $Sprite2D
 	var r = randi() % textures.size()
+	print(r)
 	sprite.texture = textures[r]
